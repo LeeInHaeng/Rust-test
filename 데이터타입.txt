@@ -1,0 +1,85 @@
+|크기|부호 있음|부호 없음|
+|---|---|---|
+|8bit|i8|u8|
+|16bit|i16|u16|
+|32bit|i32|u32|
+|64bit|i64|u64|
+|arch|isize|usize|
+- ex) i8 : -(2^7) ~ (2^7-1) == -128~127
+- ex) u8 : 0 ~ 2^8-1 == 0~255
+- isize, usize : 실행 중인 컴퓨터가 32bit, 64bit 에 따라 달라진다.
+- 특별한 타입을 적지 않을 경우 디폴트 : i32, f64 타입 사용
+### 컴파운드 타입
+- 튜플 타입
+  - 고정된 길이(크기 변경 불가능), 다른 타입이 가능
+```
+fn main() {
+	let tup = (500, 6.4, 1);
+	let (x, y, z) = tup;
+	println!("y의 값 : {}", y);
+
+	let x : (i32, f64, u8) = (500, 6.4, 1);
+	println!("x의 값 : {}, {}, {}", x.0, x.1, x.2);
+}
+```
+- 배열 타입
+  - 모든 요소의 타입이 같아야 하며, 튜플과 마찬가지로 고정된 길이
+```
+fn main() {
+	let a = [1, 2, 3, 4, 5];
+	let first = a[0];
+}
+```
+### 함수 (리턴이 좀 특이한듯?)
+```
+fn main() {
+	let x = plus_one(5);
+	println!("x의 값 : {}", x);
+}
+fn plus_one(x: i32) -> i32 {
+// 특이점 1 : 리턴 타입을 -> 로 지정한다!
+// 특이점 2 : 리턴시 세미콜론(;)을 붙이지 않는다!
+	x+1
+}
+```
+### let 구문에서 if 표현식 사용
+```
+fn main() {
+	let condition = true;
+	let number = if condition {
+			5
+		      } else {
+			6
+		      };
+```
+### 루프에서 값 리턴하기
+- loop : 무한 반복문
+```
+fn main() {
+	let mut counter = 0;
+	let result = loop {
+		counter += 1;
+		if counter == 10 {
+			break counter * 2;
+		}
+	};
+```
+- while : 다른 언어들과 비슷
+```
+while index < 5 {
+~
+}
+```
+- for : iter() 혹은 .. 을 사용
+```
+fn main() {
+	let a = [10, 20, 30];
+	for element in a.iter() {
+		//
+	}
+
+	for number in (1..4) {
+		//
+	}
+}
+```
